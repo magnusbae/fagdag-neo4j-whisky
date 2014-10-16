@@ -26,7 +26,10 @@ public class Application extends Neo4jConfiguration{
 
     @Bean(destroyMethod = "shutdown")
     public GraphDatabaseService graphDatabaseService() {
-        return new SpringRestGraphDatabase("http://app30744079:z10SZDOZyXlOEZolA0pg@app30744079.sb02.stations.graphenedb.com:24789");
+
+        String url = System.getenv("GRAPHENEDB_URL") != null ? System.getenv("GRAPHENEDB_URL") : "http://localhost:7474/db/data";
+
+        return new SpringRestGraphDatabase(url);
     }
 
     public static void main(String[] args) {
